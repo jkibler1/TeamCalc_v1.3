@@ -1,0 +1,465 @@
+# Josh Kibler 9/14/22
+#:import Factory kivy.factory.Factory
+
+<mySpinner@SpinnerOption>:
+    size_hint_y: None
+    height: dp(25)
+<myFilter@SpinnerOption>:
+    size_hint_y: None
+    height: dp(20)
+    font_size: sp(10)
+    #on_press: self.filter_press() would prefer something like this to on_text, to show Filtering status
+
+<MyLayout>:
+    type1_input1: type1_input1
+    type2_input1: type2_input1
+    type1_input2: type1_input2
+    type2_input2: type2_input2
+    type1_input3: type1_input3
+    type2_input3: type2_input3
+    type1_input4: type1_input4
+    type2_input4: type2_input4
+    type1_input5: type1_input5
+    type2_input5: type2_input5
+    gen_input: gen_input
+    tsize_input: tsize_input
+    #old_filter_input: old_filter_input #can remove from here and script?
+    new_filter_input: new_filter_input
+    submit: submit
+    remove2: remove2
+    remove3: remove3
+    remove4: remove4
+    remove5: remove5
+    addT: addT
+    #revert: revert
+    status: status
+    rsort: rsort
+    #psort: psort
+    wsort: wsort
+    usort: usort
+    orientation: "vertical"
+
+    #row1 title/status
+    GridLayout:
+        canvas.before:
+            Color:
+                rgba: (255/255.0,230/245.0,200/240.0,.9)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        cols: 2
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(25)
+
+        Label:
+            text: " PokeTeamCalc - v1.3"
+            size_hint_x: None
+            width: dp(150)
+            halign: "left"
+            text_size: self.size
+            color: (80/255.0,0/255.0,0/255.0,1)
+            bold: True
+        Label:
+            id: status
+            text: '< Initialized. Select and submit types! >'
+            font_size: sp(10)
+            halign: "right"
+            text_size: self.size
+            #shorten: True
+            #split_str: ' '
+            #max_lines: 2
+            padding_x: dp(2)
+            color: (0,0,0,1)
+
+    #row2 etc options
+    GridLayout:
+        canvas.before:
+            Color:
+                rgba: (1,1,1,.9)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        cols: 7
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(25)
+
+        Label:
+            text: "Team Size:"
+            color: (0,0,0,1)
+            font_size: sp(10)
+            size_hint_x: None
+            width: dp(80)
+        Spinner:
+            id: tsize_input
+            text: "3" # default
+            values: ["2", "3", "4", "5", "6"]
+            on_text: root.tsizespinner_clicked(tsize_input.text)
+            #background_color: (0,0,0,1)
+            size_hint_x: None
+            width: dp(35)
+        Label:
+            text: "Generation:"
+            color: (0,0,0,1)
+            font_size: sp(10)
+            #size_hint_x: None
+            #width: dp(70)
+        Spinner:
+            id: gen_input
+            text: "8" # default latest gen, number or string?
+            values: ["1", "2", "3", "4", "5", "6", "7", "8"]
+            on_text: root.genspinner_clicked(gen_input.text)
+            #background_color: (0,0,0,1)
+            size_hint_x: None
+            width: dp(35)
+        Label:
+            id: gen_label
+            text: "SwSh BDSP PLA"
+            font_size: sp(12)
+            #text_size: self.size
+            #halign: "left"
+            #size_hint_x: None
+            color: (0,0,0,1)
+            width: dp(150)
+            padding_x: dp(10)
+        Label:
+            text: "Exclude unused typings:"
+            color: (0,0,0,1)
+            font_size: sp(10)
+            text_size: self.size
+            halign: "right"
+            valign: "middle"
+            #size_hint_x: None
+            #width: dp(100)
+        CheckBox:
+            active: True
+            on_active: root.exclude_clicked(self, self.active)
+            size_hint_x: None
+            color: (0,0,0,1)
+            width: dp(35)
+
+#-----------------------------------------------------------------------------------------------------------------------
+    #row3 1st typing options
+    GridLayout:
+        cols: 4
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(40)
+
+        Label:
+            text: "1st typing:"
+            size_hint_x: None
+            width: dp(200)
+        Spinner:
+            id: type1_input1
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner1_clicked1(type1_input1.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Spinner:
+            id: type2_input1
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner2_clicked1(type2_input1.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Button:
+            id: submit
+            text: "Submit"
+            on_press: root.press1()
+            on_release: root.release1()
+            always_release: True
+
+    #row4 2nd typing options
+    GridLayout:
+        cols: 4
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(0)
+        opacity: 0
+        disabled: True
+
+        Label:
+            text: "2nd typing:"
+            size_hint_x: None
+            width: dp(200)
+        Spinner:
+            id: type1_input2
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner1_clicked2(type1_input2.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Spinner:
+            id: type2_input2
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner2_clicked2(type2_input2.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Button:
+            id: remove2
+            text: "Remove"
+            #on_press: root.press2()
+            on_release: root.release2()
+            always_release: True
+
+    #row5 3rd typing options
+    GridLayout:
+        cols: 4
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(0)
+        opacity: 0
+        disabled: True
+
+        Label:
+            text: "3rd typing:"
+            size_hint_x: None
+            width: dp(200)
+        Spinner:
+            id: type1_input3
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner1_clicked3(type1_input3.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Spinner:
+            id: type2_input3
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner2_clicked3(type2_input3.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Button:
+            id: remove3
+            text: "Remove"
+            on_release: root.release3()
+            always_release: True
+
+    #row6 4th typing options
+    GridLayout:
+        cols: 4
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(0)
+        opacity: 0
+        disabled: True
+
+        Label:
+            text: "4th typing:"
+            size_hint_x: None
+            width: dp(200)
+        Spinner:
+            id: type1_input4
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner1_clicked4(type1_input4.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Spinner:
+            id: type2_input4
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner2_clicked4(type2_input4.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Button:
+            id: remove4
+            text: "Remove"
+            on_release: root.release4()
+            always_release: True
+
+    #row7 5th typing options
+    GridLayout:
+        cols: 4
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(0)
+        opacity: 0
+        disabled: True
+
+        Label:
+            text: "5th typing:"
+            size_hint_x: None
+            width: dp(200)
+        Spinner:
+            id: type1_input5
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner1_clicked5(type1_input5.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Spinner:
+            id: type2_input5
+            text: "none"
+            values: ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"]
+            on_text: root.spinner2_clicked5(type2_input5.text)
+            background_normal: ''
+            background_color: root.color
+            outline_color: (0,0,0,1)
+            outline_width: 1
+            option_cls: Factory.get("mySpinner")
+        Button:
+            id: remove5
+            text: "Remove"
+            on_release: root.release5()
+            always_release: True
+#-----------------------------------------------------------------------------------------------------------------------
+
+    #row8 add typing row option
+    GridLayout:
+        cols: 2
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(15)
+
+        Button:
+            id: addT
+            text: "+ Add a typing +"
+            font_size: sp(10)
+            valign: "middle"
+            halign: "left"
+            text_size: self.size
+            padding_x: dp(60)
+            padding_y: dp(10)
+            on_press: root.addT_press()
+            on_release: root.addT_release()
+            always_release: True
+
+        #Button:
+            #id: revert
+            #text: "Revert settings"
+            #size_hint_x: None
+            #width: dp(100)
+            #font_size: sp(10)
+            #on_release: root.revert_release()
+            #always_release: True
+
+    #row9 filter options
+    GridLayout:
+        canvas.before:
+            Color:
+                rgba: (1,1,1,.9)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        cols: 8
+        size_hint: 1, None
+        size_hint_y: None
+        height: dp(25)
+        #padding: (0,0,5,0)
+
+        #GridLayout:
+            #cols: 2
+        Label:
+            text: "Rating"
+            color: (0,0,0,1)
+            font_size: sp(10)
+            size_hint_x: None
+            width: dp(35)
+        Button:
+            id: rsort
+            text: "-"
+            on_press: root.sort_press()
+            on_release: root.sort_release('r', rsort.text)
+            always_release: True
+            background_normal: ''
+            color: (0,0,0,1)
+            size_hint_x: None
+            width: dp(20)
+        Label:
+            text: "Ally typings"
+            font_size: sp(10)
+            color: (0,0,0,1)
+        #Button:
+            #id: psort
+            #text: "-"
+            #on_press: root.sort_press()
+            #on_release: root.sort_release('p', psort.text)
+            #always_release: True
+            #background_normal: ''
+            #color: (0,0,0,1)
+            #size_hint_x: None
+            #width: dp(20)
+        Spinner:
+            id: new_filter_input
+            option_cls: Factory.get("myFilter")
+            text: "any"
+            values: ["any","normal","fire","water","electric","grass","ice","fighting","poison","ground","flying","psychic","bug","rock","ghost","dragon","dark","steel","fairy"]
+            on_text: root.filter_clicked()
+            background_normal: ''
+            color: (0,0,0,1)
+            size_hint_x: None
+            width: dp(40)
+            font_size: sp(10)
+
+        Label:
+            text: "Weaknesses"
+            font_size: sp(10)
+            color: (0,0,0,1)
+        Button:
+            id: wsort
+            text: "-"
+            on_press: root.sort_press()
+            on_release: root.sort_release('w', wsort.text)
+            always_release: True
+            background_normal: ''
+            color: (0,0,0,1)
+            size_hint_x: None
+            width: dp(20)
+        Label:
+            text: "Unresists"
+            font_size: sp(10)
+            color: (0,0,0,1)
+        Button:
+            id: usort
+            text: "-"
+            on_press: root.sort_press()
+            on_release: root.sort_release('u', usort.text)
+            always_release: True
+            background_normal: ''
+            color: (0,0,0,1)
+            size_hint_x: None
+            width: dp(20)
+
+    #row10 results
+    BoxLayout:
+        RecycleView:
+            viewclass: 'Label'
+            data: root.teams_data
+            RecycleGridLayout:
+                cols: 4
+                default_size: None, dp(25)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
