@@ -37,7 +37,7 @@ version = 1.3
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,android,jnius,kivmob
+requirements = python3,kivy,android,jnius,kivmob,python2,libffi # last 2 at least maybe not needed?
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -108,7 +108,7 @@ android.api = 30
 #android.sdk = 20
 
 # (str) Android NDK version to use
-android.ndk = 23c
+android.ndk = 25b
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 #android.ndk_api = 21
@@ -187,7 +187,8 @@ android.ndk = 23c
 #android.add_assets =
 
 # (list) Gradle dependencies to add
-android.gradle_dependencies = 'com.google.firebase:firebase-ads:10.2.0'
+# NOTE HAD TO REMOVE ''
+android.gradle_dependencies = com.google.firebase:firebase-ads:10.2.0
 
 # (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
 # contains an 'androidx' package, or any package from Kotlin source.
@@ -266,7 +267,7 @@ android.archs = arm64-v8a, armeabi-v7a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
-android.numeric_version = 10223
+android.numeric_version = 10224
 
 # (bool) enables Android auto backup feature (Android API >=23)
 android.allow_backup = True
