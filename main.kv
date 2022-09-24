@@ -43,7 +43,8 @@
     GridLayout:
         canvas.before:
             Color:
-                rgba: (255/255.0,230/245.0,200/240.0,.9)
+                rgba: (247/255.0,178/255.0,209/255.0,1) # better pink color to fit branding
+                # rgba: (255/255.0,230/245.0,200/240.0,.9)
             Rectangle:
                 pos: self.pos
                 size: self.size
@@ -90,7 +91,7 @@
             color: (0,0,0,1)
             font_size: sp(10)
             size_hint_x: None
-            width: dp(80)
+            width: dp(60)
         Spinner:
             id: tsize_input
             text: "3" # default
@@ -115,16 +116,18 @@
             width: dp(35)
         Label:
             id: gen_label
-            text: "SwSh BDSP PLA"
-            font_size: sp(12)
-            #text_size: self.size
+            markup: True
+            text: "[i]SwSh BDSP PLA[/i]"
+            font_size: sp(10)
+            text_size: self.size
             #halign: "left"
+            valign: "middle"
             #size_hint_x: None
             color: (0,0,0,1)
             width: dp(150)
-            padding_x: dp(10)
+            padding_x: dp(5)
         Label:
-            text: "Exclude unused typings:"
+            text: "Exclude unused:" # typings:"
             color: (0,0,0,1)
             font_size: sp(10)
             text_size: self.size

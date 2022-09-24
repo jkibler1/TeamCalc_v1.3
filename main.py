@@ -1242,7 +1242,7 @@ class MyLayout(BoxLayout):
         global typeMUs, allTypeMUs, allTypeMUs_simp
         spinner_types = ["none", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison",
                          "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon"]
-        self.ids.gen_label.text = genlist[int(gen)-1]
+        self.ids.gen_label.text = '[i]'+ genlist[int(gen)-1] + '[/i]'
         if int(gen) >= 6:
             typeMUs = gen6typeMUs
             spinner_types.extend(["dark", "steel", "fairy"])
