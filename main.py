@@ -1655,7 +1655,9 @@ class MyLayout(BoxLayout):
             currentTrow = self.children[self.Trow-self.Trows]
             # print("child at:", currentTrow)
             # unhide typing row
-            currentTrow.height, currentTrow.opacity, currentTrow.disabled = 25, 1, False
+            # height isn't updating correctly on device, should be 40 but trying 80 to account for shortening
+            # problem may be different across devices?
+            currentTrow.height, currentTrow.opacity, currentTrow.disabled = 80, 1, False
             print("Added row:", self.Trows)
 
     # def revert_release(self):
