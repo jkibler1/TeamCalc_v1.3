@@ -54,7 +54,8 @@
         height: dp(25)
 
         Label:
-            text: " PokeTeamCalc - v1.3"
+            markup: True
+            text: " PokeTeamCalc [i]- v1.3[/i]"
             size_hint_x: None
             width: dp(150)
             halign: "left"
@@ -148,7 +149,7 @@
         cols: 4
         size_hint: 1, None
         size_hint_y: None
-        height: dp(40)
+        height: dp(35)
 
         Label:
             text: "1st typing:"
@@ -216,7 +217,8 @@
             option_cls: Factory.get("mySpinner")
         Button:
             id: remove2
-            text: "Remove"
+            text: "- Remove -"
+            font_size: sp(10)
             #on_press: root.press2()
             on_release: root.release2()
             always_release: True
@@ -256,7 +258,8 @@
             option_cls: Factory.get("mySpinner")
         Button:
             id: remove3
-            text: "Remove"
+            text: "- Remove -"
+            font_size: sp(10)
             on_release: root.release3()
             always_release: True
 
@@ -295,7 +298,8 @@
             option_cls: Factory.get("mySpinner")
         Button:
             id: remove4
-            text: "Remove"
+            text: "- Remove -"
+            font_size: sp(10)
             on_release: root.release4()
             always_release: True
 
@@ -334,7 +338,8 @@
             option_cls: Factory.get("mySpinner")
         Button:
             id: remove5
-            text: "Remove"
+            text: "- Remove -"
+            font_size: sp(10)
             on_release: root.release5()
             always_release: True
 #-----------------------------------------------------------------------------------------------------------------------
@@ -344,7 +349,8 @@
         cols: 2
         size_hint: 1, None
         size_hint_y: None
-        height: dp(15)
+        height: dp(25)
+        # height: dp(15)
 
         Button:
             id: addT

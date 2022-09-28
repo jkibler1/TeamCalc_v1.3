@@ -1655,7 +1655,7 @@ class MyLayout(BoxLayout):
             currentTrow = self.children[self.Trow-self.Trows]
             # print("child at:", currentTrow)
             # unhide typing row
-            currentTrow.height, currentTrow.opacity, currentTrow.disabled = 40, 1, False
+            currentTrow.height, currentTrow.opacity, currentTrow.disabled = 25, 1, False
             print("Added row:", self.Trows)
 
     # def revert_release(self):

@@ -37,7 +37,8 @@ version = 1.3
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,android,jnius,kivmob,python2,libffi # last 2 at least maybe not needed?
+# last 2 at least maybe not needed?
+requirements = python3,kivy,android,jnius,kivmob,python2,libffi
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -267,7 +268,7 @@ android.archs = arm64-v8a, armeabi-v7a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
-android.numeric_version = 10224
+android.numeric_version = 10225
 
 # (bool) enables Android auto backup feature (Android API >=23)
 android.allow_backup = True
