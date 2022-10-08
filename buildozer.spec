@@ -38,7 +38,7 @@ version = 1.3
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # last 2 at least maybe not needed?
-requirements = python3,kivy,android,jnius,kivmob,python2,libffi
+requirements = hostpython2,python3,kivy,android,jnius,kivmob,python2,libffi
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -94,7 +94,7 @@ fullscreen = 0
 #icon.adaptive_background.filename = %(source.dir)s/data/icon_bg.png
 
 # (list) Permissions
-#android.permissions = INTERNET,ACCESS_NETWORK_STATE
+android.permissions = INTERNET,ACCESS_NETWORK_STATE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -106,7 +106,7 @@ android.api = 30
 #android.minapi = 21
 
 # (int) Android SDK version to use
-#android.sdk = 20
+android.sdk = 24
 
 # (str) Android NDK version to use
 android.ndk = 25b
@@ -268,7 +268,7 @@ android.archs = arm64-v8a, armeabi-v7a
 
 # (int) overrides automatic versionCode computation (used in build.gradle)
 # this is not the same as app version and should only be edited if you know what you're doing
-android.numeric_version = 10226
+android.numeric_version = 10227
 
 # (bool) enables Android auto backup feature (Android API >=23)
 android.allow_backup = True
@@ -299,7 +299,7 @@ android.allow_backup = True
 #p4a.fork = kivy
 
 # (str) python-for-android branch to use, defaults to master
-p4a.branch = develop
+p4a.branch = master
 
 
 # (str) python-for-android specific commit to use, defaults to HEAD, must be within p4a.branch
