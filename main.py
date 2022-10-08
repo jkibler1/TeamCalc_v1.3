@@ -1353,6 +1353,10 @@ class MyLayout(BoxLayout):
                     print("swapped none types:", self.type1_input, self.type2_input)
                     self.TrowsTypesDict[tr] = [self.type1_input, self.type2_input]
                     print("swapped none types committed to dict:", self.TrowsTypesDict[tr])
+                elif self.type1_input == self.type2_input:
+                    self.type2_input = 'non'
+                    self.TrowsTypesDict[tr] = [self.type1_input, self.type2_input]
+                    print("same types simplified committed to dict:", self.TrowsTypesDict[tr])
 
                 # check for unused type selected while excluding
                 if exclude:
