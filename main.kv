@@ -4,6 +4,7 @@
 <mySpinner@SpinnerOption>:
     size_hint_y: None
     height: dp(25)
+    # background_color: 0.2, 0.2, 0.2, 1
 <myFilter@SpinnerOption>:
     size_hint_y: None
     height: dp(20)
@@ -98,7 +99,10 @@
             text: "3" # default
             values: ["2", "3", "4", "5", "6"]
             on_text: root.tsizespinner_clicked(tsize_input.text)
-            #background_color: (0,0,0,1)
+            # background_color: (0,0,0,.5)
+            outline_color: (0,0,0,.5)
+            outline_width: 1
+            bold: True
             size_hint_x: None
             width: dp(35)
         Label:
@@ -109,16 +113,20 @@
             #width: dp(70)
         Spinner:
             id: gen_input
-            text: "8" # default latest gen, number or string?
-            values: ["1", "2", "3", "4", "5", "6", "7", "8"]
+            text: "9" # default latest gen, number or string?
+            values: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
             on_text: root.genspinner_clicked(gen_input.text)
-            #background_color: (0,0,0,1)
+            # background_color: (1,1,1,.5)
+            color: (0,0,0,1)
+            outline_color: (1,1,1,.5)
+            outline_width: 1
+            bold: True
             size_hint_x: None
             width: dp(35)
         Label:
             id: gen_label
             markup: True
-            text: "[i]SwSh BDSP PLA[/i]"
+            text: "[i]SV[/i]"
             font_size: sp(10)
             text_size: self.size
             #halign: "left"

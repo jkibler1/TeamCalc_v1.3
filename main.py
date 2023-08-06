@@ -1,11 +1,12 @@
 # Pokemon Battle Tree Team Type Synergy Calculator GUI with Kivy aka "PokeTeamCalc" app script
 # Input a single pokemon type combo and get best possible 2 ally pokemon with fewest weaknesses and un-resists.
 # v1.3.3  Add all typing rows from the start, allow for teams of 6, ability to hide rows instead of remove
+# v1.3.4  Account for gen9, many-weaks teams better
 
 __author__ = "Josh Kibler"
 __version__ = "1.3"
 __status__ = "dev"
-__date__ = "9.14.2022"
+__date__ = "8.6.2023"
 
 import copy, re, kivy, time
 from kivy.app import App
@@ -94,7 +95,7 @@ typecolors = {"non": '#000000',
 typeMUs = gen6typeMUs
 allTypeMUs = copy.deepcopy(typeMUs)
 allTypeMUs_simp = copy.deepcopy(typeMUs)
-genlist = ["RBY", "GSC", "RSE FRLG", "DPPt HGSS", "BW B2W2", "XY ORAS", "SM USUM LGPE", "SwSh BDSP PLA"]
+genlist = ["RBY", "GSC", "RSE FRLG", "DPPt HGSS", "BW B2W2", "XY ORAS", "SM USUM LGPE", "SwSh BDSP PLA", "SV"]
 exclude = True
 # excluded = False
 unusedTypes = {1: ["ice", "fly", "roc", "gho", "nor fir", "nor wat", "nor ele", "nor gra",
@@ -164,7 +165,8 @@ unusedTypes = {1: ["ice", "fly", "roc", "gho", "nor fir", "nor wat", "nor ele", 
 # could at least add a disclaimer for now, ask what users might prefer
 8: ["nor ice", "nor poi", "nor bug", "nor roc", "nor ste", "fir gra", "fir fai",
 "ele fig", "ice poi", "fig gro", "fig fai", "poi ste", "gro fai", "bug dra",
-"bug dar", "roc gho"]}
+"bug dar", "roc gho"],
+9: ["nor ice", "nor bug", "nor roc", "nor ste", "fir fai", "ice poi", "bug dra", "roc gho"]}
 
 # testdict = {'gra ste/ste fai': {'rating': 10.50, 'tweaks': ['fir', 'wat', 'ice'], 'tURs': ['fir']},
 #             'wat gro/ste fai': {'rating': 10.25, 'tweaks': ['nor', 'bug'], 'tURs': []}}
@@ -353,9 +355,21 @@ class Team:
                     if key == 4:
                         for weak in self.teamEffects[key]:
                             self.weaksList.append(weak + "X2")
+                    # elif key == 8:
+                    #     for weak in self.teamEffects[key]:
+                    #         self.weaksList.append(weak + "X4")
                     elif key == 8:
                         for weak in self.teamEffects[key]:
+                            self.weaksList.append(weak + "X3")
+                    elif key == 16:
+                        for weak in self.teamEffects[key]:
                             self.weaksList.append(weak + "X4")
+                    elif key == 32:
+                        for weak in self.teamEffects[key]:
+                            self.weaksList.append(weak + "X5")
+                    elif key == 64:
+                        for weak in self.teamEffects[key]:
+                            self.weaksList.append(weak + "X6")
                     else:
                         for weak in self.teamEffects[key]:
                             self.weaksList.append(weak)
@@ -1119,6 +1133,9 @@ def calculate(TrowsTypesDict, tsize, gen):
         elif len(value['tweaks']) == 1:
             if 'X' not in value['tweaks'][0]:
                 teamsDict2[new_key] = value
+        # trying to account for teams with little to no topPercent results
+        elif noWeakTeamsNum == 0 and oneWeakTeamsNum == 0 and len(value['tweaks']) <= 3 and str(value['tweaks']).count('X') <= 1 and str(tsize) not in str(value['tweaks']):
+            teamsDict2[new_key] = value
         # else:
         #     teamsDict2[new_key] = value
     if(writable):
@@ -1376,13 +1393,13 @@ class MyLayout(BoxLayout):
                     else:
                         #self.submit.disabled = True
                         if Trows_diff > 2:
-                            self.ids.status.text = '< Calculating (for 3 may take some minutes)... >'
+                            self.ids.status.text = '< Calculating (for 3 may take a minute)... >'
                         else:
                             self.ids.status.text = '< Calculating... >'
                         self.validCalc = True
                 else:
                     if Trows_diff > 2:
-                        self.ids.status.text = '< Calculating (for 3 may take some minutes)... >'
+                        self.ids.status.text = '< Calculating (for 3 may take a minute)... >'
                     else:
                         self.ids.status.text = '< Calculating... >'
                     self.validCalc = True
