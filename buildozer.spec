@@ -105,6 +105,18 @@ android.api = 31
 # (int) Minimum API your APK / AAB will support.
 #android.minapi = 21
 
+# (bool) Whether the receiver should be exported. Set it to "false". PLEASE FIX ERROR 8/7/23
+android.manifest = """
+    <receiver
+        android:name="com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver"
+        android:enabled="true"
+        android:exported="false">
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+    </receiver>
+"""
+
 # (int) Android SDK version to use
 android.sdk = 30
 
