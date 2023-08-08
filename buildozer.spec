@@ -38,7 +38,7 @@ version = 1.3
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # last 2 at least maybe not needed?
-requirements = python3,kivy,android,jnius,kivmob,python2,libffi
+requirements = python3,kivy,android,jnius,kivmob #,python2,libffi
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
