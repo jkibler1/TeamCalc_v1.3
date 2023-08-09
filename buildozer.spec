@@ -201,7 +201,7 @@ android.ndk = 25b
 
 # (list) Gradle dependencies to add
 # NOTE HAD TO REMOVE ''
-android.gradle_dependencies = com.google.firebase:firebase-ads:10.2.1
+# android.gradle_dependencies = com.google.firebase:firebase-ads:10.2.1
 
 # (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
 # contains an 'androidx' package, or any package from Kotlin source.
