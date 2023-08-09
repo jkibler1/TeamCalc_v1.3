@@ -206,7 +206,7 @@ android.gradle_dependencies = com.google.firebase:firebase-ads:10.2.0
 # (bool) Enable AndroidX support. Enable when 'android.gradle_dependencies'
 # contains an 'androidx' package, or any package from Kotlin source.
 # android.enable_androidx requires android.api >= 28
-#android.enable_androidx = False
+android.enable_androidx = False
 
 # (list) add java compile options
 # this can for example be necessary when importing certain java libraries using the 'android.gradle_dependencies' option
@@ -250,7 +250,7 @@ android.gradle_dependencies = com.google.firebase:firebase-ads:10.2.0
 
 # (bool) Indicate whether the screen should stay on
 # Don't forget to add the WAKE_LOCK permission if you set this to True
-#android.wakelock = False
+android.wakelock = False
 
 # (list) Android application meta-data to set (key=value format)
 android.meta_data = com.google.android.gms.ads.APPLICATION_ID=ca-app-pub-9314162462794737~2460228955
@@ -298,7 +298,7 @@ android.allow_backup = True
 # android.no-compile-pyo = True
 
 # (str) The format used to package the app for release mode (aab or apk).
-# android.release_artifact = aab
+android.release_artifact = aab
 
 #
 # Python for android (p4a) specific
